@@ -370,6 +370,29 @@ function uep_add_event_info_metabox() {
 }
 add_action( 'add_meta_boxes', 'uep_add_event_info_metabox' );
 
+
+function uep_admin_script_style( $hook ) {
+	
+	if ( 'post.php' == $hook || 'post-new.php' == $hook ) {
+		wp_enqueue_script(
+				'upcoming-events',
+				SCRIPTS . 'script.js',
+				array( 'jquery', 'jquery-ui-datepicker' ),
+				'1.0',
+				true
+				);
+		
+		wp_enqueue_style(
+				'jquery-ui-calendar',
+				STYLES . 'jquery-ui-1.10.4.custom.min.css',
+				false,
+				'1.10.4',
+				'all'
+				);
+	}
+}
+add_action( 'admin_enqueue_scripts', 'uep_admin_script_style' );
+
 function uep_render_event_info_metabox( $post ) {
 	
 	// generate a nonce field
