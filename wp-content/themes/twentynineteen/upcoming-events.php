@@ -36,3 +36,38 @@ $args = array(
 
 register_post_type( 'event', $args );
 
+add_action( 'init', 'uep_custom_post_type' );
+
+function uep_add_event_info_metabox() {
+	add_meta_box(
+			'uep-event-info-metabox',
+			__( 'Event Info', 'uep' ),
+			'uep_render_event_info_metabox',
+			'event',
+			'side',
+			'core'
+			);
+}
+add_action( 'add_meta_boxes', 'uep_add_event_info_metabox' );
+
+function uep_admin_script_style( $hook ) {
+	
+	if ( 'post.php' == $hook || 'post-new.php' == $hook ) {
+		wp_enqueue_script(
+				'upcoming-events',
+				SCRIPTS . 'script.js',
+				array( 'jquery', 'jquery-ui-datepicker' ),
+				'1.0',
+				true
+				);
+		
+		wp_enqueue_style(
+				'jquery-ui-calendar',
+				STYLES . 'jquery-ui-1.10.4.custom.min.css',
+				false,
+				'1.10.4',
+				'all'
+				);
+	}
+}
+add_action( 'admin_enqueue_scripts', 'uep_admin_script_style' );

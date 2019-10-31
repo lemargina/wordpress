@@ -379,7 +379,7 @@ function uep_render_event_info_metabox( $post ) {
 	$event_start_date = get_post_meta( $post->ID, 'event-start-date', true );
 	$event_end_date = get_post_meta( $post->ID, 'event-end-date', true );
 	$event_venue = get_post_meta( $post->ID, 'event-venue', true );
-	
+	$event_link = get_post_meta($post->ID,'event-link',true);
 	// if there is previously saved value then retrieve it, else set it to the current time
 	$event_start_date = ! empty( $event_start_date ) ? $event_start_date : time();
 	
@@ -394,8 +394,10 @@ function uep_render_event_info_metabox( $post ) {
 <label for="uep-event-end-date"><?php _e( 'Event End Date:', 'uep' ); ?></label>
         <input class="widefat uep-event-date-input" id="uep-event-end-date" type="text" name="uep-event-end-date" placeholder="Format: February 18, 2014" value="<?php echo date( 'F d, Y', $event_end_date ); ?>" />
  
-<label for="uep-event-venue"><?php _e( 'Event Venue:', 'uep' ); ?></label>
+<label for="uep-event-venue"><?php _e( 'Event Location:', 'uep' ); ?></label>
         <input class="widefat" id="uep-event-venue" type="text" name="uep-event-venue" placeholder="eg. Times Square" value="<?php echo $event_venue; ?>" />
  
-   
- <?php  }?>
+<label for="uep-event-link"><?php _e( 'Event Link:', 'uep' ); ?></label>
+        <input class="widefat" id="uep-event-link" type="text" name="uep-event-venue" placeholder="eg. www.example.bg" value="<?php echo $event_link; ?>" />
+  
+<?php  }?>
